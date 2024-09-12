@@ -62,7 +62,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         });
 
         listItem.setOnClickListener(view -> {
-            if (currentItem.quantity > 0) {
+            //if (currentItem.quantity > 0) {
                 //if shoppingcart contains item => item.quantity ++, else add item
                 Intent intent = new Intent(context.getApplicationContext(), SpecificItemActivity.class);
 
@@ -78,7 +78,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
                  */
                 context.startActivity(intent);
 
-            }
+            //}
         });
 
         return listItem;

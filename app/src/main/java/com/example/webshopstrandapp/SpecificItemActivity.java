@@ -87,23 +87,29 @@ public class SpecificItemActivity extends AppCompatActivity {
         temp = "Amount: " + tempItem.quantity;
         txtAmount.setText(temp);
         addBtn.setOnClickListener(view -> {
-            addToCart(tempItem);
-            Toast.makeText(getApplicationContext(), "Added " + tempItem.name, Toast.LENGTH_LONG).show();
-            for (Item i : inventory){
-                if (i.id == tempItem.id){
-                    i.setQuantity(i.quantity - 1);
-                    if (i.quantity == 0){
-                        finish();
-                    }
-                    else {
-                        break;
+            if(tempItem.quantity > 0) {
+                addToCart(tempItem);
+
+                for (Item i : inventory) {
+                    if (i.id == tempItem.id) {
+                        i.setQuantity(i.quantity - 1);
+                        /*
+                        if (i.quantity == 0) {
+                            finish();
+                        } else {
+                            break;
+                        }
+
+                         */
                     }
                 }
+                tempItem.setQuantity(tempItem.quantity - 1);
+                temp = "Amount: " + tempItem.quantity;
+                txtAmount.setText(temp);
             }
-            tempItem.setQuantity(tempItem.quantity - 1);
-            temp = "Amount: " + tempItem.quantity;
-            txtAmount.setText(temp);
-
+            else {
+                Toast.makeText(getApplicationContext(), "No more stock " + tempItem.name, Toast.LENGTH_LONG).show();
+            }
         });
     }
 
