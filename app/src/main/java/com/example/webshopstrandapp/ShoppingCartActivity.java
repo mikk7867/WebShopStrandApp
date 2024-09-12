@@ -1,7 +1,6 @@
 package com.example.webshopstrandapp;
 
 import static com.example.webshopstrandapp.MainActivity.cart;
-import static com.example.webshopstrandapp.MainActivity.inventory;
 
 import android.os.Bundle;
 import android.widget.ListView;
@@ -13,9 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.List;
-
-public class ShoppingCart extends AppCompatActivity {
+public class ShoppingCartActivity extends AppCompatActivity {
 
     TextView total;
     ItemAdapter adapter;
@@ -53,12 +50,14 @@ public class ShoppingCart extends AppCompatActivity {
 
     void setTotal(){
         total = findViewById(R.id.price_total);
-        double sum = 1e-6;
-        for (Item i : cart){
-            sum += (i.price * i.quantity);
+        if(total != null) {
+            double sum = 1e-6;
+            for (Item i : cart) {
+                sum += (i.price * i.quantity);
+            }
+            sum = (double) Math.round(sum * 100d) / 100d;
+            String temp = "Total: " + sum + " $";
+            total.setText(temp);
         }
-        sum = (double)Math.round(sum * 100d) / 100d;
-        String temp = "Total: " + sum + " $";
-        total.setText(temp);
     }
 }

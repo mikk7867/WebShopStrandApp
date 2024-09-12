@@ -18,8 +18,6 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import com.example.webshopstrandapp.Item;
-
 public class ItemAdapter extends ArrayAdapter<Item> {
 
     private List<Item> itemList;
@@ -48,15 +46,25 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         tvQuantity.setText(String.valueOf(currentItem.quantity));
 
         Button addBtn = listItem.findViewById(R.id.add_btn);
-        addBtn.setOnClickListener(view -> addItem(currentItem));
+        addBtn.setOnClickListener(view -> {
+                addItem(currentItem);
+                if (context instanceof ShoppingCartActivity) {
+                ((ShoppingCartActivity) context).setTotal();
+            }
+        });
 
         Button removeBtn = listItem.findViewById(R.id.remove_btn);
-        removeBtn.setOnClickListener(view -> removeItem(currentItem));
+        removeBtn.setOnClickListener(view -> {
+            removeItem(currentItem);
+            if (context instanceof ShoppingCartActivity) {
+                ((ShoppingCartActivity) context).setTotal();
+            }
+        });
 
         listItem.setOnClickListener(view -> {
             if (currentItem.quantity > 0) {
                 //if shoppingcart contains item => item.quantity ++, else add item
-                Intent intent = new Intent(context.getApplicationContext(), SpecificItem.class);
+                Intent intent = new Intent(context.getApplicationContext(), SpecificItemActivity.class);
 
                 intent.putExtra("ITEM_ID", currentItem.getId());
 
@@ -100,8 +108,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     }
 
     void removeItem(Item temp) {
-        //Toast.makeText(context, "Remove", Toast.LENGTH_SHORT).show();
-        //if (temp.quantity > 0) {
         boolean exists = false;
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i).id == temp.id) {

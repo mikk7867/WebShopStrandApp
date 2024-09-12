@@ -1,6 +1,5 @@
 package com.example.webshopstrandapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class SpecificItem extends AppCompatActivity {
+public class SpecificItemActivity extends AppCompatActivity {
 
     TextView txtName;
     TextView txtDesc;
